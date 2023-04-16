@@ -3,7 +3,6 @@ using System.Data.Common;
 using System.Data;
 using Hospital_Management_System.BAL;
 using Hospital_Management_System.Areas.Room.Models;
-using Hospital_Management_System.Areas.Room.Models;
 
 namespace Hospital_Management_System.DAL
 {
