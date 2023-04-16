@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Hospital Management System.sln
+/Hospital Management System.csproj
+/Hospital Management System.csproj
