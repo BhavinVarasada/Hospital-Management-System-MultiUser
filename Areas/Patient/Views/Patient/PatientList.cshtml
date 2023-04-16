@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewData["Title"] = "PatientList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Data
+@model DataTable
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>&nbsp;Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a asp-area="Patient" asp-controller="Patient" asp-action="Index">Patient List</a>
+            <i class="fa fa-circle"></i>
+        </li>
+    </ul>
+</div>
+<br />
+
+<div class="col-md-12">
+    <div class="row">
+
+        <div class="caption font-dark col-md-10">
+            <h4>
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject bold uppercase">Patient List</span>
+            </h4>
+        </div>
+
+        @*<div class="col-md-6">
+        <form method="post" class="form-inline">
+
+        <select class="form-control" name="CountryName" id="CountryDropdownList">
+        @* @*Here First argument Country ID Should Be Consider as Values and second argument CountryName as html that is diaplay in list@**@
+        @*<option value="">Select Country</option>
+
+
+        @foreach (var item in ViewBag.CountryList)
+        {
+        <option value="@item.CountryName">@item.CountryName</option>
+        }
+        </select>
+
+        <input class="form-control mr-sm-2" name="CountryCode" type="text" placeholder="Country Code" />
+        <button type="submit" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="Index" class="btn btn-success">Apply Filters</button>
+
+        </form>
+
+        </div>*@
+
+        <div class="col-md-2">
+            <form asp-area="Patient" asp-controller="Patient" asp-action="Add">
+                <button class="btn btn-success"><i class="fa fa-plus"></i>&nbsp Add Patient</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<div style="overflow-x: auto; overflow-y:auto; height:400px">
+    <table class="display table table table-striped table-bordered table-sm" id="table_id" style="background-color:white ; margin-top:20px">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Gender</th>
+                <th>DateOfBirth</th>
+                <th>Blood group</th>
+                <th>Mobile Number</th>
+                <th>Address</th>
+                <th>CreationDate</th>
+                <th>ModificationDate</th>
+                <th>&nbsp;&nbsp;Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (DataRow dr in Model.Rows)
+            {
+                <tr>
+                    <td>@dr["PatientName"]</td>
+                    <td>@dr["Gender"]</td>
+                    <td>@Convert.ToDateTime(dr["DateofBirth"]).ToString("dd-MM-yyyy")</td>
+                    <td>@dr["BloodGroupName"]</td>
+                    <td>@dr["MobileNumber"]</td>
+                    <td>@dr["Address"]</td>
+                    <td>@dr["CreationDate"]</td>
+                    <td>@dr["ModificationDate"]</td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="PatientID" value="@Convert.ToInt32(dr["PatientID"])">
+                            <button type="submit" class="btn btn-danger" asp-area="Patient" asp-controller="Patient" asp-action="delete" onclick="return fun1()"><i class="fa fa-close"></i></button>
+                            <button class="btn btn-info" asp-route-PatientID="@Convert.ToInt32(dr["PatientID"])" asp-area="Patient" asp-controller="Patient" asp-action="Add"><i class="fa fa-edit"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+@section Scripts
+    {
+    <script>
+        function fun1() {
+            if (confirm("Are you sure you want to Delete")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+
+}
+

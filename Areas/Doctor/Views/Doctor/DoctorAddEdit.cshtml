@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "DoctorAddEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Hospital_Management_System.Areas.Doctor.Models.DoctorModel
+<div>
+    <div style="background-color:white; overflow-y:scroll; overflow-x:hidden;height:483px; padding:20px">
+    <div class="col-md-12">
+        <h3>@TempData["DoctorInsertMsg"]</h3>
+        <div class="portlet-title">
+            <div class="row">
+                <div class="caption font-green-haze col-md-10">
+                    <i class="icon-plus font-green"></i>
+                    <span class="caption-subject bold uppercase">Doctor Add/Edit</span>
+                </div>
+            </div>
+        </div>
+        <br />
+        
+        <form method="post" asp-area="Doctor" asp-controller="Doctor" asp-action="Save" enctype="multipart/form-data">
+            @Html.HiddenFor(x=>x.DoctorID)
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Doctor Name</label>
+                <input type="text" class="form-control" asp-for="DoctorName" placeholder="Enter DoctorName" />
+            </div>
+            <span asp-validation-for="DoctorName" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Department</label>
+                <select class="form-control" asp-for="DepartmentID" asp-items="@(new SelectList(ViewBag.DepartmentList,"DepartmentID","DepartmentName"))">
+                    <option value="">Select Department</option>
+                </select>
+            </div>
+            <span asp-validation-for="DepartmentID" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Designation</label>
+                <select class="form-control" asp-for="DesignationID" asp-items="@(new SelectList(ViewBag.DesignationList,"DesignationID","DesignationName"))">
+                    <option value="">Select Designation</option>
+                </select>
+            </div>
+            <span asp-validation-for="DesignationID" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Mobile Number</label>
+                <input type="text" class="form-control" asp-for="MobileNumber" placeholder="Enter MobileNumber" />
+            </div>
+            <span asp-validation-for="MobileNumber" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Gender</label>
+                <input type="text" class="form-control" asp-for="Gender" placeholder="Enter Gender" />
+            </div>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Speciality</label>
+                <select class="form-control" asp-for="SpecialityID" asp-items="@(new SelectList(ViewBag.SpecialityList,"SpecialityID","SpecialityName"))">
+                    <option value="">Select Speciality</option>
+                </select>
+            </div>
+            <span asp-validation-for="SpecialityID" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Education</label>
+                <input type="text" class="form-control" asp-for="Education" placeholder="Enter Education" />
+            </div>
+            <span asp-validation-for="Education" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Is Available ?</label>
+                <div>
+                        <input type="radio" id="true" name="IsAvailable" value="true" asp-for="IsAvailable" />
+                    <label>YES</label>
+                </div>
+                <div>
+                        <input type="radio" id="false" name="IsAvailable" value="false" asp-for="IsAvailable" />
+                    <label>NO</label>
+                </div>
+            </div>
+            <span asp-validation-for="IsAvailable" class="text-danger"></span>
+
+            <input type="submit" class="btn btn-success" />
+            <a asp-area="Doctor" asp-controller="Doctor" asp-action="Back">
+                <button type="button" class="btn btn-dark">Cancel</button>
+            </a>
+        </form>
+    </div>
+    </div>
+</div>
+

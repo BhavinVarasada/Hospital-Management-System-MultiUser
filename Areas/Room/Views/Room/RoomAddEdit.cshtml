@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "RoomAddEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Hospital_Management_System.Areas.Room.Models.RoomModel
+<div>
+    <div style="background-color:white; overflow-y:scroll; overflow-x:hidden;height:483px; padding:20px">
+        <div class="col-md-12">
+            <h3>@TempData["RoomInsertMsg"]</h3>
+            <div class="portlet-title">
+                <div class="row">
+                    <div class="caption font-green-haze col-md-10">
+                        <i class="icon-plus font-green"></i>
+                        <span class="caption-subject bold uppercase">Room Add/Edit</span>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <form method="post" asp-area="Room" asp-controller="Room" asp-action="Save" enctype="multipart/form-data">
+                @Html.HiddenFor(x=>x.RoomID)
+
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>RoomType</label>
+                    <select class="form-control" asp-for="RoomTypeID" asp-items="@(new SelectList(ViewBag.RoomTypeList,"RoomTypeID","RoomTypeName"))">
+                        <option value="">Select RoomType</option>
+                    </select>
+                </div>
+                <span asp-validation-for="RoomTypeID" class="text-danger"></span>
+
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>Room Rate</label>
+                    <input type="number" class="form-control" asp-for="RoomRate" placeholder="Enter RoomRate" />
+                </div>
+                <span asp-validation-for="RoomRate" class="text-danger"></span>
+
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>Room Number</label>
+                    <input type="text" class="form-control" asp-for="RoomNumber" placeholder="Enter RoomNumber" />
+                </div>
+                <span asp-validation-for="RoomNumber" class="text-danger"></span>
+
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>Building</label>
+                    <select class="form-control" asp-for="BuildingID" asp-items="@(new SelectList(ViewBag.BuildingList,"BuildingID","BuildingNumber"))">
+                        <option value="">Select Building</option>
+                    </select>
+                </div>
+                <span asp-validation-for="BuildingID" class="text-danger"></span>
+
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>BedNumber</label>
+                    <input type="text" class="form-control" asp-for="BedNumber" placeholder="Enter BedNumber" />
+                </div>
+                <span asp-validation-for="BedNumber" class="text-danger"></span>
+
+                <div class="form-group">
+                    <label><span class="text-danger">*</span>Is Available ?</label>
+                    <div>
+                        <input type="radio" id="true" name="IsAvailable" value="true" asp-for="IsAvailable" />
+                        <label>YES</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="false" name="IsAvailable" value="false" asp-for="IsAvailable" />
+                        <label>NO</label>
+                    </div>
+                </div>
+                <span asp-validation-for="IsAvailable" class="text-danger"></span>
+
+                <input type="submit" class="btn btn-success" />
+                <a asp-area="Room" asp-controller="Room" asp-action="Back">
+                    <button type="button" class="btn btn-dark">Cancel</button>
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+

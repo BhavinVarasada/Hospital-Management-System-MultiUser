@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "AppointmentAddEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Hospital_Management_System.Areas.Appointment.Models.AppointmentModel
+<div>
+    <div class="col-md-12">
+        <h3>@TempData["AppointmentInsertMsg"]</h3>
+        <div class="portlet-title">
+            <div class="row">
+                <div class="caption font-green-haze col-md-10">
+                    <i class="icon-plus font-green"></i>
+                    <span class="caption-subject bold uppercase">Appointment Add/Edit</span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <form method="post" asp-area="Appointment" asp-controller="Appointment" asp-action="Save" enctype="multipart/form-data">
+            @Html.HiddenFor(x=>x.AppointmentID)
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Patient Name</label>
+                <select class="form-control" asp-for="PatientID" asp-items="@(new SelectList(ViewBag.PatientList,"PatientID","PatientName"))">
+                    <option value="">Select Patient</option>
+                </select>
+            </div>
+            <span asp-validation-for="PatientID" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Appointment Date</label>
+                <input type="date" class="form-control" asp-for="AppointmentDate" placeholder="Enter AppointmentDate" />
+            </div>
+            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Appointment Time</label>
+                <input type="time" class="form-control" asp-for="AppointmentTime" placeholder="Enter AppointmentTime" />
+            </div>
+            <span asp-validation-for="AppointmentTime" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Doctor Name</label>
+                <select class="form-control" asp-for="DoctorID" asp-items="@(new SelectList(ViewBag.DoctorList,"DoctorID","DoctorName"))">
+                    <option value="">Select Doctor</option>
+                </select>
+            </div>
+            <span asp-validation-for="DoctorID" class="text-danger"></span>
+
+            <div class="form-group">
+                <label><span class="text-danger">*</span>Problem</label>
+                <input type="text" class="form-control" asp-for="Problem" placeholder="Enter Problem" />
+            </div>
+            <span asp-validation-for="Problem" class="text-danger"></span>
+
+            <input type="submit" class="btn btn-success" />
+            <a asp-area="Appointment" asp-controller="Appointment" asp-action="Back">
+                <button type="button" class="btn btn-dark">Cancel</button>
+            </a>
+        </form>
+    </div>
+</div>
+
